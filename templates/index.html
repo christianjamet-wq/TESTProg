@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recherche Gencod/EAN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Recherche Gencod/EAN</h1>
+    <form method="POST" action="/">
+        <label for="gencod">Gencod / Code EAN (13 chiffres):</label><br>
+        <input type="text" id="gencod" name="gencod" maxlength="13"><br><br>
+        <input type="submit" value="Chercher">
+    </form>
+
+    {% if result %}
+        <p>{{ result }}</p>
+        {% if "Code barre inexistant" in result %}
+            <form method="POST" action="/search_marque">
+                <label for="marque">Marque:</label><br>
+                <input type="text" id="marque" name="marque"><br><br>
+                <input type="submit" value="Chercher Traitement SAV">
+            </form>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
